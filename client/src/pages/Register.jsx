@@ -18,7 +18,7 @@ export default function Register() {
     setError("");
     try {
       await register({ ...form, role: "patient" });
-      navigate("/");
+      navigate("/dashboard");
     } catch (err) {
       setError(err.response?.data?.message || "Registration failed");
     }

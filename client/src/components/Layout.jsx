@@ -1,4 +1,4 @@
-import { NavLink, Outlet, useNavigate, useLocation } from "react-router-dom";
+import { NavLink, Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
 import {
   IconDashboard, IconCalendar, IconPatients, IconDoctor,
@@ -6,7 +6,7 @@ import {
 } from "./icons.jsx";
 
 const NAV = [
-  { to: "/", label: "Dashboard", icon: IconDashboard, exact: true },
+  { to: "/dashboard", label: "Dashboard", icon: IconDashboard, exact: true },
   { to: "/appointments", label: "Appointments", icon: IconCalendar },
   { to: "/patients", label: "Patients", icon: IconPatients, roles: ["admin", "receptionist", "doctor"] },
   { to: "/doctors", label: "Doctors", icon: IconDoctor, roles: ["admin"] },
@@ -15,7 +15,7 @@ const NAV = [
 ];
 
 const TITLES = {
-  "/": "Dashboard",
+  "/dashboard": "Dashboard",
   "/appointments": "Appointments",
   "/patients": "Patients",
   "/doctors": "Doctors & Departments",
@@ -39,9 +39,9 @@ export default function Layout() {
   return (
     <div className="app-shell">
       <aside className="sidebar">
-        <div className="logo">
+        <Link to="/" className="logo">
           <IconCross /> <span>Health<span className="dot">Care</span></span>
-        </div>
+        </Link>
         <nav>
           {visible.map(({ to, label, icon: Icon, exact }) => (
             <NavLink key={to} to={to} end={exact}>
