@@ -27,7 +27,7 @@
   color: var(--primary-dark); padding: 6px 14px; border-radius: 30px;
   font-size: 0.82rem; font-weight: 600; margin-bottom: 20px;
 }
-.lp-hero h1 { font-size: 4rem; line-height: 1.02; font-weight: 800; }
+.lp-hero h1 { font-size: 3.1rem; line-height: 1.1; font-weight: 800; letter-spacing: -0.02em; }
 .lp-hero h1 .grad { background: linear-gradient(120deg, #0d9488, #14b8a6); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .lp-hero p { color: var(--muted); font-size: 1.1rem; line-height: 1.65; margin: 20px 0 30px; max-width: 520px; }
 .lp-hero .cta { display: flex; gap: 14px; flex-wrap: wrap; }
@@ -63,7 +63,7 @@
 .lp-section.alt { background: #f8fafc; }
 .lp-head { text-align: center; max-width: 640px; margin: 0 auto 50px; }
 .lp-head .eyebrow { color: var(--primary); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; }
-.lp-head h2 { font-size: 2.6rem; font-weight: 800; margin: 10px 0 14px; }
+.lp-head h2 { font-size: 2.2rem; font-weight: 700; margin: 10px 0 14px; letter-spacing: -0.01em; }
 .lp-head p { color: var(--muted); font-size: 1.05rem; line-height: 1.6; }
 
 /* Features grid */
