@@ -1,11 +1,13 @@
 :root {
-  /* Teal/green medical palette */
-  --primary: #0d9488;        /* teal-600 */
-  --primary-dark: #0f766e;   /* teal-700 */
-  --primary-light: #ccfbf1;  /* teal-100 */
-  --accent: #14b8a6;
-  --sidebar-bg: #0f3d3a;     /* deep teal */
-  --sidebar-hover: #155e57;
+  /* Purple primary + dark-green surfaces + green accent */
+  --primary: #4f46e5;        /* indigo-600 (purple buttons) */
+  --primary-dark: #4338ca;   /* indigo-700 */
+  --primary-light: #e0e7ff;  /* indigo-100 */
+  --accent: #10b981;         /* emerald-500 (logo/stars/dividers) */
+  --accent-light: #a7f3d0;
+  --dark-green: #0c2b26;     /* dark bands / footer */
+  --sidebar-bg: #0c2b26;     /* dark green */
+  --sidebar-hover: #16403a;
   --bg: #f1f5f4;
   --card: #ffffff;
   --text: #1f2937;
@@ -176,7 +178,7 @@ tbody tr:hover { background: #f8fafc; }
 /* ---------- Auth (split screen) ---------- */
 .auth-page { display: flex; min-height: 100vh; }
 .auth-brand {
-  flex: 1; background: linear-gradient(135deg, #0f766e 0%, #0d9488 50%, #14b8a6 100%);
+  flex: 1; background: linear-gradient(150deg, #4f46e5 0%, #3730a3 55%, #0c2b26 100%);
   color: #fff; display: flex; flex-direction: column; justify-content: center;
   padding: 60px; position: relative; overflow: hidden;
 }

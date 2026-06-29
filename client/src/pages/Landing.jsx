@@ -1,30 +1,29 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
+import { IconCross } from "../components/icons.jsx";
 import {
-  IconCalendar, IconRx, IconBill, IconPatients, IconDoctor, IconDashboard, IconCross,
-} from "../components/icons.jsx";
+  HeroArt, ArtDigitize, ArtCustomize, ArtAccess, ArtSecurity, CtaArt,
+} from "../components/illustrations.jsx";
 import "./landing.css";
 
-const FEATURES = [
-  { icon: IconCalendar, title: "Online Appointments", text: "Patients book by department and doctor; the system prevents double-booking automatically." },
-  { icon: IconRx, title: "Digital Prescriptions", text: "Doctors write prescriptions linked to each visit — instantly available to the patient." },
-  { icon: IconBill, title: "Billing & Payments", text: "Generate itemized bills, track paid/unpaid status, and keep clean financial records." },
-  { icon: IconPatients, title: "Patient Records", text: "A central, searchable registry of patient profiles, history, and contact details." },
-  { icon: IconDoctor, title: "Doctor & Departments", text: "Manage specialists, departments, fees, and availability from one admin panel." },
-  { icon: IconDashboard, title: "Insightful Dashboard", text: "Real-time counts of patients, doctors, appointments and pending bills at a glance." },
+const PARTNERS = [
+  "City Care Hospital", "Metro Clinic", "Wellness Labs", "Orchid Health",
+  "LifeLine Centre", "MediTrust", "Apex Hospital",
 ];
 
-const ROLES = [
-  { emoji: "🧑‍💼", title: "Admin", text: "Full control over doctors, departments, staff and hospital-wide reports." },
-  { emoji: "🩺", title: "Doctor", text: "View appointments, write prescriptions and track patient history." },
-  { emoji: "💁", title: "Receptionist", text: "Register patients, schedule appointments and handle billing." },
-  { emoji: "🧑", title: "Patient", text: "Book visits, view prescriptions and pay bills — anytime, anywhere." },
+const ROWS = [
+  { art: ArtDigitize, reverse: false, h: "Digitize records in seconds", p: "Turn any paper document into a secure digital record instantly — no more lost files or manual data entry.", cta: "Get Started" },
+  { art: ArtCustomize, reverse: true, h: "Customize as per your needs", p: "Built to fit your workflow. Configure departments, roles, and fees to match exactly how your hospital runs.", cta: "Make it Yours" },
+  { art: ArtAccess, reverse: false, h: "Access from anywhere, anytime", p: "Stay connected 24/7 with secure access from any device — desktop, tablet, or phone.", cta: "Get Access" },
+  { art: ArtSecurity, reverse: true, h: "Risk-free data security", p: "Your data is protected with role-based access and secure authentication, eliminating the risk of data loss.", cta: "Stay Secure" },
 ];
 
-const STEPS = [
-  { n: 1, title: "Register & sign in", text: "Patients self-register; staff get role-based accounts from the admin." },
-  { n: 2, title: "Book & treat", text: "Schedule appointments, then doctors record diagnoses and prescriptions." },
-  { n: 3, title: "Bill & track", text: "Generate bills, mark payments, and monitor everything from the dashboard." },
+const TESTIMONIALS = [
+  { stars: 5, text: "The most straightforward hospital system we've used. Setup was quick and our staff adapted within days.", n: "Dr. A. Sharma", r: "Director, City Care Hospital" },
+  { stars: 5, text: "Appointments, billing and records in one place. It has genuinely reduced our daily paperwork.", n: "R. Mehta", r: "Admin, Metro Clinic" },
+  { stars: 5, text: "Tailored exactly to how our departments work. Patient experience has clearly improved.", n: "Dr. S. Nair", r: "Orthopedics, Apex Hospital" },
+  { stars: 5, text: "Reliable, simple and secure. Highly recommend it to any growing clinic.", n: "P. Verma", r: "Manager, Wellness Labs" },
+  { stars: 5, text: "Great support and an easy interface. Our front desk loves it.", n: "K. Iyer", r: "Reception Lead, LifeLine Centre" },
 ];
 
 export default function Landing() {
@@ -36,18 +35,18 @@ export default function Landing() {
       <header className="lp-nav">
         <div className="brand"><IconCross /> HealthCare HMS</div>
         <nav className="links">
-          <a href="#features">Features</a>
-          <a href="#roles">Who it's for</a>
-          <a href="#how">How it works</a>
-          <a href="#contact">Contact</a>
+          <a href="#features">Our Products</a>
+          <a href="#testimonials">Company</a>
+          <a href="#recognition">Careers</a>
+          <a href="#footer">Contact Us</a>
         </nav>
         <div className="actions">
           {user ? (
-            <Link to="/dashboard"><button className="btn-primary-lg" style={{ padding: "9px 18px" }}>Go to Dashboard</button></Link>
+            <Link to="/dashboard" className="btn-demo">Go to Dashboard</Link>
           ) : (
             <>
-              <Link to="/login"><button className="btn-ghost">Login</button></Link>
-              <Link to="/register"><button>Get Started</button></Link>
+              <Link to="/register" className="btn-demo">Demo</Link>
+              <Link to="/login" className="btn-login">Login</Link>
             </>
           )}
         </div>
@@ -56,134 +55,106 @@ export default function Landing() {
       {/* Hero */}
       <section className="lp-hero">
         <div>
-          <span className="pill">✚ Trusted by 500+ hospitals & clinics</span>
-          <h1>The all-in-one <span className="grad">hospital OS</span></h1>
-          <p>
-            One smart platform for appointments, patient records, prescriptions,
-            billing and reports — OPD, IPD, pharmacy and lab, unified in a single
-            secure system so your team spends less time on paperwork and more on care.
-          </p>
-          <div className="cta">
-            <Link to="/register" className="btn-primary-lg">Get Started Free</Link>
-            <Link to="/login" className="btn-outline-lg">Sign In</Link>
+          <h1>Upgrade to<br />Simplicity</h1>
+          <p>Manage everything in a single system — patients, appointments, prescriptions and billing.</p>
+          <Link to="/register" className="btn-primary-lg">Simplify now</Link>
+        </div>
+        <div className="hero-art"><HeroArt /></div>
+      </section>
+
+      {/* Trusted strip */}
+      <section className="lp-trusted" id="features">
+        <h3>Trusted by <span className="purple">500+</span> Setups</h3>
+        <div className="trusted-row">
+          {PARTNERS.map((p) => <span key={p}>{p}</span>)}
+        </div>
+      </section>
+
+      {/* Zig-zag feature rows */}
+      <section className="lp-rows">
+        {ROWS.map(({ art: Art, reverse, h, p, cta }, i) => (
+          <div key={h}>
+            <div className={`lp-row ${reverse ? "reverse" : ""}`}>
+              <div className="text">
+                <h2>{h}</h2>
+                <p>{p}</p>
+                <Link to="/register" className="btn-primary-lg">{cta}</Link>
+              </div>
+              <div className="art"><Art /></div>
+            </div>
+            {i < ROWS.length - 1 && <div className="row-divider" />}
           </div>
-          <p className="note">No credit card needed · Demo accounts included</p>
-        </div>
+        ))}
+      </section>
 
-        {/* Mock dashboard preview */}
-        <div className="hero-mock">
-          <div className="bar"></div>
-          <div className="mock-grid">
-            <div className="mock-stat"><div className="n">1,240</div><div className="l">Patients</div></div>
-            <div className="mock-stat"><div className="n">86</div><div className="l">Doctors</div></div>
-            <div className="mock-stat"><div className="n">320</div><div className="l">Appointments</div></div>
-            <div className="mock-stat"><div className="n">12</div><div className="l">Unpaid Bills</div></div>
+      {/* Testimonials */}
+      <section className="lp-testi" id="testimonials">
+        <h2>Witness our Efforts here</h2>
+        <div className="testi-track">
+          {TESTIMONIALS.map((t, i) => (
+            <div className="testi-card" key={i}>
+              <div className="quote">&#8220;</div>
+              <div className="stars">{"★".repeat(t.stars)}</div>
+              <p>{t.text}</p>
+              <div className="who">
+                <div className="n">{t.n}</div>
+                <div className="r">{t.r}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Recognition */}
+      <section className="lp-reco" id="recognition">
+        <h2>Recognized by the Best, Providing the Best</h2>
+        <div className="reco-badges">
+          <div className="reco-badge">
+            <div className="score">4.9</div>
+            <div className="stars">★★★★★</div>
+            <div className="src">User Rating</div>
           </div>
-          <div className="mock-row"><span className="av"></span> John Doe — Cardiology <span className="tag">Booked</span></div>
-          <div className="mock-row"><span className="av"></span> Jane Smith — Dermatology <span className="tag">Completed</span></div>
-          <div className="mock-row"><span className="av"></span> Raj Patel — Orthopedics <span className="tag">Booked</span></div>
+          <div className="reco-badge">
+            <div className="score">5.0</div>
+            <div className="stars">★★★★★</div>
+            <div className="src">Verified Reviews</div>
+          </div>
+          <div className="reco-badge">
+            <div className="score">500+</div>
+            <div className="stars">★★★★★</div>
+            <div className="src">Happy Hospitals</div>
+          </div>
         </div>
       </section>
 
-      {/* Stats strip */}
-      <section className="lp-stats">
-        <div className="s"><div className="n">500+</div><div className="l">Hospitals & clinics</div></div>
-        <div className="s"><div className="n">1M+</div><div className="l">Patients managed</div></div>
-        <div className="s"><div className="n">99.9%</div><div className="l">Uptime</div></div>
-        <div className="s"><div className="n">4.8/5</div><div className="l">User rating</div></div>
-      </section>
-
-      {/* Features */}
-      <section className="lp-section" id="features">
-        <div className="lp-head">
-          <div className="eyebrow">Features</div>
-          <h2>Everything your hospital needs</h2>
-          <p>One platform to manage the entire patient journey — from the first appointment to the final bill.</p>
+      {/* Dark CTA band */}
+      <section className="lp-cta">
+        <div className="art"><CtaArt /></div>
+        <div>
+          <h2>Upgrade Your Setup<br />to a Simpler Level</h2>
+          <Link to="/register">Connect to Simplify &rarr;</Link>
         </div>
-        <div className="feat-grid">
-          {FEATURES.map(({ icon: Icon, title, text }) => (
-            <div className="feat" key={title}>
-              <div className="ic"><Icon /></div>
-              <h3>{title}</h3>
-              <p>{text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Roles */}
-      <section className="lp-section alt" id="roles">
-        <div className="lp-head">
-          <div className="eyebrow">Who it's for</div>
-          <h2>Built for every role in your hospital</h2>
-          <p>Each user gets a tailored experience with exactly the access they need.</p>
-        </div>
-        <div className="roles-grid">
-          {ROLES.map(({ emoji, title, text }) => (
-            <div className="role-card" key={title}>
-              <div className="emoji">{emoji}</div>
-              <h3>{title}</h3>
-              <p>{text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* How it works */}
-      <section className="lp-section" id="how">
-        <div className="lp-head">
-          <div className="eyebrow">How it works</div>
-          <h2>Up and running in 3 simple steps</h2>
-        </div>
-        <div className="steps">
-          {STEPS.map(({ n, title, text }) => (
-            <div className="step" key={n}>
-              <div className="num">{n}</div>
-              <h3>{title}</h3>
-              <p>{text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="lp-cta" id="contact">
-        <h2>Ready to modernize your hospital?</h2>
-        <p>Create a free account and explore the full system with built-in demo data.</p>
-        <Link to="/register">Get Started Now</Link>
       </section>
 
       {/* Footer */}
-      <footer className="lp-footer">
-        <div className="cols">
-          <div>
-            <div className="brand">✚ HealthCare HMS</div>
-            <p>A complete hospital management system for appointments, records, prescriptions and billing.</p>
-          </div>
-          <div>
-            <h4>Product</h4>
-            <ul>
-              <li><a href="#features">Features</a></li>
-              <li><a href="#roles">Who it's for</a></li>
-              <li><a href="#how">How it works</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4>Account</h4>
-            <ul>
-              <li><Link to="/login">Login</Link></li>
-              <li><Link to="/register">Register</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h4>Contact</h4>
-            <ul>
-              <li><a href="mailto:support@healthcarehms.com">support@healthcarehms.com</a></li>
-              <li><a href="#">+1 (800) 123-4567</a></li>
-            </ul>
-          </div>
+      <footer className="lp-footer" id="footer">
+        <div className="brand"><IconCross /> HealthCare HMS</div>
+        <div className="social">
+          <span>𝕏</span><span>f</span><span>in</span><span>◎</span>
         </div>
-        <div className="bottom">© 2026 HealthCare HMS · Software Engineering Project</div>
+        <div className="fcols">
+          <a href="#features">Company</a>
+          <a href="#features">Products</a>
+          <a href="#recognition">Security</a>
+          <Link to="/login">Login</Link>
+          <Link to="/register">Register</Link>
+        </div>
+        <div className="contact">
+          <span>📞 +91 90000 00000</span>
+          <span>📍 Bengaluru, India</span>
+          <span>✉ support@healthcarehms.com</span>
+        </div>
+        <div className="copy">© 2026 HealthCare HMS · Software Engineering Project. All rights reserved.</div>
       </footer>
     </div>
   );
