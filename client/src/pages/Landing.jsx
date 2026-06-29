@@ -56,12 +56,12 @@ export default function Landing() {
       {/* Hero */}
       <section className="lp-hero">
         <div>
-          <span className="pill">✚ Trusted hospital management</span>
-          <h1>Run your hospital on <span className="grad">one smart platform</span></h1>
+          <span className="pill">✚ Trusted by 500+ hospitals & clinics</span>
+          <h1>The all-in-one <span className="grad">hospital OS</span></h1>
           <p>
-            HealthCare HMS brings appointments, patient records, prescriptions and
-            billing together in a single, secure system — so your team spends less
-            time on paperwork and more time on care.
+            One smart platform for appointments, patient records, prescriptions,
+            billing and reports — OPD, IPD, pharmacy and lab, unified in a single
+            secure system so your team spends less time on paperwork and more on care.
           </p>
           <div className="cta">
             <Link to="/register" className="btn-primary-lg">Get Started Free</Link>

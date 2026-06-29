@@ -17,7 +17,27 @@
   --shadow: 0 1px 3px rgba(16, 24, 40, 0.08), 0 1px 2px rgba(16, 24, 40, 0.06);
   --shadow-lg: 0 10px 25px rgba(16, 24, 40, 0.10);
   --radius: 12px;
+  /* GTA 5 (Pricedown) display font for headings/brand; falls back to Inter */
+  --display-font: "Pricedown", "Inter", system-ui, sans-serif;
 }
+
+/* Helper: apply the GTA-style display font with appropriate spacing */
+.display-font,
+.lp-nav .brand,
+.lp-hero h1,
+.lp-head h2,
+.lp-cta h2,
+.lp-stats .s .n,
+.lp-footer .brand,
+.sidebar .logo,
+.auth-brand .logo {
+  font-family: var(--display-font);
+  letter-spacing: 0.03em;
+  font-weight: 400; /* Pricedown has a single weight */
+}
+
+/* Pricedown renders better slightly larger + with tracking on big hero text */
+.lp-hero h1 { letter-spacing: 0.02em; }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
