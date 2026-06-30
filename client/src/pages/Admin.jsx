@@ -3,7 +3,7 @@ import api from "../api/client.js";
 
 const BLANK = {
   name: "", gender: "male", specialty: "", qualifications: "", experienceYears: "",
-  languages: "", hospital: "", city: "", state: "", address: "",
+  languages: "", hospital: "", town: "", city: "", state: "", address: "",
   phone: "", email: "", consultationFee: "", rating: "", about: "",
 };
 
@@ -67,13 +67,14 @@ export default function Admin() {
 
       <table>
         <thead>
-          <tr><th>Name</th><th>Specialty</th><th>City</th><th>State</th><th>Phone</th><th>Actions</th></tr>
+          <tr><th>Name</th><th>Specialty</th><th>Town</th><th>City</th><th>State</th><th>Phone</th><th>Actions</th></tr>
         </thead>
         <tbody>
           {doctors.map((d) => (
             <tr key={d._id}>
               <td>{d.name}</td>
               <td>{d.specialty}</td>
+              <td>{d.town}</td>
               <td>{d.city}</td>
               <td>{d.state}</td>
               <td>{d.phone}</td>
@@ -83,7 +84,7 @@ export default function Admin() {
               </td>
             </tr>
           ))}
-          {doctors.length === 0 && <tr><td colSpan="6">No doctors yet. Add one.</td></tr>}
+          {doctors.length === 0 && <tr><td colSpan="7">No doctors yet. Add one.</td></tr>}
         </tbody>
       </table>
 
@@ -106,6 +107,7 @@ export default function Admin() {
                 <div className="full"><label>Qualifications (comma separated)</label><input name="qualifications" value={form.qualifications} onChange={update} placeholder="MBBS, MD" /></div>
                 <div className="full"><label>Languages (comma separated)</label><input name="languages" value={form.languages} onChange={update} placeholder="English, Hindi" /></div>
                 <div><label>Hospital / Clinic</label><input name="hospital" value={form.hospital} onChange={update} /></div>
+                <div><label>Town / Area</label><input name="town" value={form.town} onChange={update} /></div>
                 <div><label>City</label><input name="city" value={form.city} onChange={update} required /></div>
                 <div><label>State</label><input name="state" value={form.state} onChange={update} required /></div>
                 <div><label>Consultation Fee (₹)</label><input name="consultationFee" type="number" value={form.consultationFee} onChange={update} /></div>

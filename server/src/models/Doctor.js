@@ -12,6 +12,7 @@ const doctorSchema = new mongoose.Schema(
 
     // Location
     hospital: { type: String, default: "" },   // clinic / hospital name
+    town: { type: String, default: "", trim: true },  // area / locality within a city
     city: { type: String, required: true, trim: true },
     state: { type: String, required: true, trim: true },
     address: { type: String, default: "" },
@@ -28,6 +29,6 @@ const doctorSchema = new mongoose.Schema(
 );
 
 // Text index so a single search box can match name / specialty / hospital
-doctorSchema.index({ name: "text", specialty: "text", hospital: "text", city: "text", state: "text" });
+doctorSchema.index({ name: "text", specialty: "text", hospital: "text", town: "text", city: "text", state: "text" });
 
 export default mongoose.model("Doctor", doctorSchema);

@@ -61,7 +61,7 @@ export default function DoctorDetail() {
             <h3 style={{ marginBottom: 12 }}>Contact & Location</h3>
             <div className="ci">🏥 <span>{doc.hospital}</span></div>
             <div className="ci">📍 <span>{doc.address}</span></div>
-            <div className="ci">🌐 <span>{doc.city}, {doc.state}</span></div>
+            <div className="ci">🌐 <span>{[doc.town, doc.city, doc.state].filter(Boolean).join(", ")}</span></div>
             <div className="ci">📞 <a href={`tel:${doc.phone}`}>{doc.phone}</a></div>
             <div className="ci">✉ <a href={`mailto:${doc.email}`}>{doc.email}</a></div>
           </div>

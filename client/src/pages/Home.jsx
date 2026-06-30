@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../api/client.js";
 import DoctorCard from "../components/DoctorCard.jsx";
 
-const EMPTY = { search: "", specialty: "", state: "", city: "" };
+const EMPTY = { search: "", specialty: "", state: "", town: "" };
 
 export default function Home() {
   const [meta, setMeta] = useState({ states: [], cities: [], specialties: [], total: 0 });
@@ -64,6 +64,10 @@ export default function Home() {
           <select name="state" value={filters.state} onChange={update}>
             <option value="">All states</option>
             {meta.states.map((s) => <option key={s} value={s}>{s}</option>)}
+          </select>
+          <select name="town" value={filters.town} onChange={update}>
+            <option value="">All towns</option>
+            {(meta.towns || []).map((t) => <option key={t} value={t}>{t}</option>)}
           </select>
           <button type="submit">Search</button>
         </form>

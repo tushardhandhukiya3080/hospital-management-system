@@ -11,20 +11,20 @@ import Doctor from "./models/Doctor.js";
 
 // --- building blocks ---
 const CITIES = [
-  { city: "Mumbai", state: "Maharashtra" },
-  { city: "Pune", state: "Maharashtra" },
-  { city: "New Delhi", state: "Delhi" },
-  { city: "Bengaluru", state: "Karnataka" },
-  { city: "Chennai", state: "Tamil Nadu" },
-  { city: "Kolkata", state: "West Bengal" },
-  { city: "Hyderabad", state: "Telangana" },
-  { city: "Ahmedabad", state: "Gujarat" },
-  { city: "Jaipur", state: "Rajasthan" },
-  { city: "Lucknow", state: "Uttar Pradesh" },
-  { city: "Kochi", state: "Kerala" },
-  { city: "Chandigarh", state: "Punjab" },
-  { city: "Bhopal", state: "Madhya Pradesh" },
-  { city: "Patna", state: "Bihar" },
+  { city: "Mumbai", state: "Maharashtra", towns: ["Andheri", "Bandra", "Dadar"] },
+  { city: "Pune", state: "Maharashtra", towns: ["Kothrud", "Hadapsar", "Viman Nagar"] },
+  { city: "New Delhi", state: "Delhi", towns: ["Saket", "Dwarka", "Rohini"] },
+  { city: "Bengaluru", state: "Karnataka", towns: ["Koramangala", "Whitefield", "Jayanagar"] },
+  { city: "Chennai", state: "Tamil Nadu", towns: ["T. Nagar", "Adyar", "Velachery"] },
+  { city: "Kolkata", state: "West Bengal", towns: ["Salt Lake", "Ballygunge", "Howrah"] },
+  { city: "Hyderabad", state: "Telangana", towns: ["Banjara Hills", "Gachibowli", "Madhapur"] },
+  { city: "Ahmedabad", state: "Gujarat", towns: ["Satellite", "Navrangpura", "Maninagar"] },
+  { city: "Jaipur", state: "Rajasthan", towns: ["Malviya Nagar", "Vaishali Nagar", "C-Scheme"] },
+  { city: "Lucknow", state: "Uttar Pradesh", towns: ["Gomti Nagar", "Hazratganj", "Aliganj"] },
+  { city: "Kochi", state: "Kerala", towns: ["Kakkanad", "Edappally", "Fort Kochi"] },
+  { city: "Chandigarh", state: "Punjab", towns: ["Sector 17", "Sector 35", "Sector 22"] },
+  { city: "Bhopal", state: "Madhya Pradesh", towns: ["Arera Colony", "MP Nagar", "Kolar"] },
+  { city: "Patna", state: "Bihar", towns: ["Boring Road", "Kankarbagh", "Patliputra"] },
 ];
 
 const SPECIALTIES = [
@@ -64,6 +64,7 @@ const buildDoctors = (count) => {
   for (let i = 0; i < count; i++) {
     const spec = pick(SPECIALTIES, i);
     const loc = pick(CITIES, Math.floor(i / 2) + i);
+    const town = pick(loc.towns, i);
     const first = pick(FIRST, i * 3 + 1);
     const last = pick(LAST, i * 2 + 3);
     const gender = i % 2 === 0 ? "male" : "female";
@@ -79,10 +80,11 @@ const buildDoctors = (count) => {
       qualifications: spec.quals,
       experienceYears: exp,
       languages: langs,
-      hospital: `${loc.city} ${pick(["Care Hospital", "Multispeciality Clinic", "Medical Centre", "Health Institute"], i)}`,
+      hospital: `${town} ${pick(["Care Hospital", "Multispeciality Clinic", "Medical Centre", "Health Institute"], i)}`,
+      town,
       city: loc.city,
       state: loc.state,
-      address: `${100 + i}, ${pick(["MG Road", "Park Street", "Ring Road", "Civil Lines", "Sector 12"], i)}, ${loc.city}`,
+      address: `${100 + i}, ${pick(["Main Road", "Market Lane", "Ring Road", "Civil Lines", "Sector 12"], i)}, ${town}, ${loc.city}`,
       // Clearly fictional placeholder contact details:
       phone: `+91 90000 ${String(10000 + i).slice(-5)}`,
       email: `${first}.${last}`.toLowerCase() + `${i}@example-clinic.in`,

@@ -77,8 +77,8 @@ label { font-weight: 600; font-size: 0.85rem; color: #374151; display: block; ma
 .hero p { color: #dbe4ff; font-size: 1.1rem; margin-bottom: 30px; }
 .search-bar {
   background: #fff; border-radius: 14px; box-shadow: var(--shadow-lg);
-  padding: 14px; display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 10px;
-  max-width: 900px; margin: 0 auto;
+  padding: 14px; display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr auto; gap: 10px;
+  max-width: 980px; margin: 0 auto;
 }
 .search-bar input, .search-bar select { margin: 0; }
 .search-bar button { white-space: nowrap; }

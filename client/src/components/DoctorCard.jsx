@@ -15,7 +15,7 @@ export default function DoctorCard({ doc }) {
       </div>
       <div className="doc-quals">{doc.qualifications.join(", ")}</div>
       <div className="doc-meta">
-        <span>📍 {doc.city}, {doc.state}</span>
+        <span>📍 {[doc.town, doc.city, doc.state].filter(Boolean).join(", ")}</span>
         <span>🩺 {doc.experienceYears} yrs exp</span>
       </div>
       <div className="doc-foot">

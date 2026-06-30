@@ -4,17 +4,18 @@ import Doctor from "../models/Doctor.js";
 // Public listing with search + filters + pagination.
 export const getDoctors = async (req, res) => {
   try {
-    const { search = "", state = "", city = "", specialty = "" } = req.query;
+    const { search = "", state = "", city = "", town = "", specialty = "" } = req.query;
     const page = Math.max(parseInt(req.query.page) || 1, 1);
     const limit = Math.min(parseInt(req.query.limit) || 12, 60);
 
     const filter = {};
     if (state) filter.state = state;
     if (city) filter.city = city;
+    if (town) filter.town = town;
     if (specialty) filter.specialty = specialty;
     if (search.trim()) {
       const rx = new RegExp(search.trim(), "i");
-      filter.$or = [{ name: rx }, { specialty: rx }, { hospital: rx }, { city: rx }, { state: rx }];
+      filter.$or = [{ name: rx }, { specialty: rx }, { hospital: rx }, { town: rx }, { city: rx }, { state: rx }];
     }
 
     const [total, doctors] = await Promise.all([
@@ -31,15 +32,17 @@ export const getDoctors = async (req, res) => {
 // GET /api/doctors/meta — distinct values for filter dropdowns + counts
 export const getMeta = async (_req, res) => {
   try {
-    const [states, cities, specialties, total] = await Promise.all([
+    const [states, cities, towns, specialties, total] = await Promise.all([
       Doctor.distinct("state"),
       Doctor.distinct("city"),
+      Doctor.distinct("town"),
       Doctor.distinct("specialty"),
       Doctor.countDocuments(),
     ]);
     res.json({
       states: states.sort(),
       cities: cities.sort(),
+      towns: towns.filter(Boolean).sort(),
       specialties: specialties.sort(),
       total,
     });
