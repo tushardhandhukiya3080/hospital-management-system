@@ -1,95 +1,92 @@
-# Hospital Management System (HMS)
+# MediFind India — Doctor Directory
 
-A full-stack **MERN** (MongoDB, Express, React, Node.js) Hospital Management System built as a
+A full-stack **MERN** web application to **find doctors across India** by specialty,
+city and state — with their qualifications and contact details. Built as a
 final-year **Software Engineering** project.
 
-This repository contains **both** the engineering documents (SRS, diagrams) and the working
-application code, so it can be submitted as a complete SE project.
+> Note: the GitHub repo is still named `hospital-management-system` (the project's
+> earlier scope). The codebase is now a doctor directory.
 
 ---
 
-## 1. Project Overview
+## 1. Features
 
-The Hospital Management System digitizes the day-to-day operations of a hospital: patient
-registration, doctor management, appointment booking, prescriptions, and billing. It replaces
-manual, paper-based record keeping with a secure, role-based web application.
+**Public site**
+- Search doctors by name, specialty or hospital
+- Filter by **specialty**, **state** and **city**
+- Paginated result grid of doctor cards
+- Doctor profile pages with qualifications, languages, experience, fees and contact details
 
-### Actors (Roles)
-| Role | Responsibilities |
-|------|------------------|
-| **Admin** | Manage doctors, departments, view all data, generate reports |
-| **Doctor** | View their appointments, write prescriptions, view patient history |
-| **Receptionist** | Register patients, book/cancel appointments, generate bills |
-| **Patient** | Register, book appointments, view prescriptions & bills |
+**Admin panel** (login required)
+- Add, edit and delete doctors
+- Role-based access (admin only) protected by JWT
 
 ---
 
 ## 2. Tech Stack
-
 | Layer | Technology |
 |-------|-----------|
 | Frontend | React (Vite), React Router, Axios |
 | Backend | Node.js, Express |
-| Database | MongoDB (Mongoose ODM) |
-| Auth | JWT (JSON Web Tokens) + bcrypt password hashing |
-| Styling | Plain CSS (can be swapped for Tailwind/Bootstrap) |
+| Database | MongoDB (Mongoose) |
+| Auth | JWT + bcrypt |
 
 ---
 
-## 3. Team & Suggested Work Split (2–3 members)
-
-| Member | Owns |
-|--------|------|
-| **Member 1 – Backend** | Express API, models, auth, database |
-| **Member 2 – Frontend** | React pages, components, API integration |
-| **Member 3 – Docs & Testing** | SRS, diagrams, test cases, deployment, demo |
-
-> With 2 members, combine Docs/Testing into both roles.
+## 3. Data
+The app is seeded with **fictional sample data** (~54 doctors across 13 states and
+18 specialties). Names, phone numbers and emails are placeholders and do **not**
+refer to real people. Admins can add real entries through the admin panel.
 
 ---
 
-## 4. Repository Structure
-
+## 4. Project Structure
 ```
-Hospital-Management-System/
-├── docs/                  # Software Engineering deliverables
-│   ├── 01-SRS.md
-│   ├── 02-use-case.md
-│   ├── 03-er-diagram.md
-│   ├── 04-class-sequence-diagrams.md
-│   └── 05-test-cases.md
-├── server/                # Express + MongoDB backend
-├── client/                # React frontend
-└── README.md
+├── server/                # Express + MongoDB API
+│   └── src/
+│       ├── models/        # Doctor, User
+│       ├── controllers/   # doctor, auth
+│       ├── routes/        # /api/doctors, /api/auth
+│       └── seed.js        # sample data
+├── client/                # React app
+│   └── src/
+│       ├── pages/         # Home, DoctorDetail, Login, Admin
+│       └── components/    # Navbar, DoctorCard, ...
+└── docs/                  # Software Engineering documents
 ```
 
 ---
 
 ## 5. Quick Start
 
-See [docs/SETUP.md](docs/SETUP.md) for full instructions. Short version:
+**Prerequisites:** Node.js 18+, MongoDB running locally (or a MongoDB Atlas URI).
 
 ```bash
 # Backend
 cd server
 npm install
-cp .env.example .env      # then edit values
-npm run dev
+cp .env.example .env        # set MONGO_URI and JWT_SECRET
+npm run seed                # load sample doctors + admin
+npm run dev                 # http://localhost:5000
 
 # Frontend (new terminal)
 cd client
 npm install
-npm run dev
+cp .env.example .env
+npm run dev                 # http://localhost:5173
 ```
+
+**Admin login:** `admin@medifind.in` / `admin123`
 
 ---
 
-## 6. SE Deliverables Checklist
-
-- [x] Software Requirements Specification (SRS)
-- [x] Use-case diagram + descriptions
-- [x] ER diagram + data dictionary
-- [x] Class diagram
-- [x] Sequence diagrams
-- [x] Test cases
-- [x] Working full-stack application
+## 6. API Overview
+| Method | Endpoint | Access | Purpose |
+|--------|----------|--------|---------|
+| GET | `/api/doctors` | Public | List with `search`, `specialty`, `state`, `city`, `page` |
+| GET | `/api/doctors/meta` | Public | Distinct states/cities/specialties for filters |
+| GET | `/api/doctors/:id` | Public | Single doctor profile |
+| POST | `/api/doctors` | Admin | Create a doctor |
+| PUT | `/api/doctors/:id` | Admin | Update a doctor |
+| DELETE | `/api/doctors/:id` | Admin | Delete a doctor |
+| POST | `/api/auth/login` | Public | Admin sign-in (returns JWT) |

@@ -1,22 +1,22 @@
 import { Router } from "express";
 import {
-  createDoctor,
   getDoctors,
+  getMeta,
+  getDoctor,
+  createDoctor,
   updateDoctor,
   deleteDoctor,
-  createDepartment,
-  getDepartments,
 } from "../controllers/doctorController.js";
 import { protect, authorize } from "../middleware/auth.js";
 
 const router = Router();
 
-// Departments
-router.get("/departments", protect, getDepartments);
-router.post("/departments", protect, authorize("admin"), createDepartment);
+// Public
+router.get("/", getDoctors);
+router.get("/meta", getMeta);
+router.get("/:id", getDoctor);
 
-// Doctors
-router.get("/", protect, getDoctors);
+// Admin only
 router.post("/", protect, authorize("admin"), createDoctor);
 router.put("/:id", protect, authorize("admin"), updateDoctor);
 router.delete("/:id", protect, authorize("admin"), deleteDoctor);
